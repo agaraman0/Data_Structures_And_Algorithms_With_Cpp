@@ -1,0 +1,49 @@
+{
+#Initial Template for Python 3
+def main():
+    T=int(input())
+    while(T>0):
+        n=int(input())
+        mat=[[0 for j in range(n)] for i in range(n)]
+        line1=[int(x) for x in input().strip().split()]
+        k=0
+        for i in range(n):
+            for j in range (n):
+                mat[i][j]=line1[k]
+                k+=1
+                
+        print(findMinOpeartion(mat,n))
+        
+            
+        
+        T-=1
+if __name__=="__main__":
+    main()
+}
+def findMinOpeartion(matrix, n):
+    #Your code here
+    
+    arr_row = []
+    arr_col = []
+    mx = 0
+    for i in range(n):
+        temp1 = 0
+        temp2 = 0
+        for j in range(n):
+            temp1 = temp1 + matrix[i][j]
+            temp2 = temp2 + matrix[j][i]
+        
+        if max(temp1,temp2)>mx:
+            mx = max(temp1,temp2)
+            
+        arr_row.append(temp1)
+        arr_col.append(temp2)
+    
+    x = 0
+    for i in arr_row:
+        x = x + (mx-i)
+    y = 0
+    for j in arr_col:
+        y = y + (mx-j)
+        
+    return min(x,y)
